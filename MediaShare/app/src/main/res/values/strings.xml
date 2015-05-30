@@ -11,4 +11,10 @@
     <string name="sign_up_tab_indicator">SIGN UP</string>
     <string name="title_activity_signin">Signin</string>
     <string name="title_activity_signup">Signup</string>
+    <string name="hint_first_name">First Name</string>
+    <string name="hint_last_name">Last Name</string>
+    <string name="hint_email_address">Email Address</string>
+    <string name="hint_password">Password</string>
+    <string name="hint_confirm_password">Confirm Password</string>
+    <string name="signup_checkbox_text"><u>I agree to the terms of service</u></string>
 </resources>
