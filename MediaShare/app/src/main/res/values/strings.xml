@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">MediaShare</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="hint_login_email">Email</string>
+    <string name="hint_login_password">Password</string>
+    <string name="title_activity_login">MediaShare</string>
+
+    <string name="sign_in_tab_indicator">SIGN IN</string>
+    <string name="sign_up_tab_indicator">SIGN UP</string>
+    <string name="title_activity_signin">Signin</string>
+    <string name="title_activity_signup">Signup</string>
+</resources>
