@@ -20,7 +20,7 @@
     <string name="hello">Hello!</string>
     <string name="welcome">Welcome to&#160;</string>
     <string name="slide_to_discover">Tap here to discover</string>
-    <string name="title_activity_dashboard">DashboardActivity</string>
+    <string name="title_activity_dashboard">User Dashboard</string>
 
     <string name="hello_world">Hello world!</string>
 </resources>
