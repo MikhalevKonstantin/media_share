@@ -33,7 +33,7 @@
         android:background="@drawable/button_background"
         android:text="LOGIN"
         android:textColor="#ffffff"
-        android:id="@+id/button"
+        android:id="@+id/button_signin"
         android:layout_below="@+id/editText2"
         android:layout_alignLeft="@+id/editText2"
         android:layout_alignStart="@+id/editText2"
