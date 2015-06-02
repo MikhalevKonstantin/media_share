@@ -13,6 +13,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:onClick="loginActivity"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="@string/slide_to_discover"
         android:id="@+id/slide_text"
@@ -20,7 +21,9 @@
         android:layout_centerHorizontal="true"
         android:textColor="#ff6600"
         android:singleLine="false"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:nestedScrollingEnabled="false"
+        android:clickable="true" />
 
 
     <TextView
