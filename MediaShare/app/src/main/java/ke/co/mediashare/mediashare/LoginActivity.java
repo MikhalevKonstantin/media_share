@@ -1,6 +1,7 @@
 package ke.co.mediashare.mediashare;
 
 
+import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -9,10 +10,13 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBar.Tab;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 
 
 public class LoginActivity extends ActionBarActivity {
     private static final String TAG = "media_share";
+    private Button signIn;
 
 
     @Override
@@ -20,7 +24,10 @@ public class LoginActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         setUpTabs(savedInstanceState);
+
+
     }
+
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
@@ -31,7 +38,7 @@ public class LoginActivity extends ActionBarActivity {
 
     private void setUpTabs(Bundle savedInstanceState) {
         ActionBar actionBar = getSupportActionBar();
-        actionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(android.R.color.holo_orange_dark)));
+        actionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.action_bar_color)));
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
         Tab signIn_tab = actionBar.newTab();
