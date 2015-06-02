@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.app.Activity;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 public class MainActivity extends Activity {
@@ -25,35 +26,35 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
 
         // Setting Typeface for the Start Screen's TextViews
-        hello_text = (TextView)findViewById(R.id.hello_text);
+        hello_text = (TextView) findViewById(R.id.hello_text);
         Typeface typeface = Typeface.createFromAsset(getAssets(), "fonts/RobotoCondensedBold.ttf");
         hello_text.setTypeface(typeface);
 
-        welcome_text = (TextView)findViewById(R.id.welcome_text);
+        welcome_text = (TextView) findViewById(R.id.welcome_text);
         Typeface typeface1 = Typeface.createFromAsset(getAssets(), "fonts/RobotoCondensedRegular.ttf");
         welcome_text.setTypeface(typeface1);
 
-        media_share_text = (TextView)findViewById(R.id.media_share_text);
+        media_share_text = (TextView) findViewById(R.id.media_share_text);
         Typeface typeface4 = Typeface.createFromAsset(getAssets(), "fonts/RobotoCondensedBold.ttf");
         media_share_text.setTypeface(typeface4);
 
 
-        tag_line_text = (TextView)findViewById(R.id.tag_line_text);
+        tag_line_text = (TextView) findViewById(R.id.tag_line_text);
         Typeface typeface2 = Typeface.createFromAsset(getAssets(), "fonts/RobotoCondensedRegular.ttf");
         tag_line_text.setTypeface(typeface2);
 
-        slide_text = (TextView)findViewById(R.id.slide_text);
+        slide_text = (TextView) findViewById(R.id.slide_text);
         Typeface typeface3 = Typeface.createFromAsset(getAssets(), "fonts/RobotoCondensedLight.ttf");
         slide_text.setTypeface(typeface3);
 
 
-
-
     }
 
-    public void loginActivity(View view){
+    public void loginActivity(View view) {
         Intent login_intent = new Intent(this, LoginActivity.class);
         startActivity(login_intent);
+
+        overridePendingTransition(R.anim.activity_in, R.anim.activity_out);
     }
 
     @Override
