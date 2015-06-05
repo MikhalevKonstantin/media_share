@@ -13,6 +13,7 @@ import android.widget.Button;
 
 public class DashboardActivity extends ActionBarActivity {
     private Button btn_discover_books;
+    private Button btn_my_profile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,11 +23,21 @@ public class DashboardActivity extends ActionBarActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.action_bar_color)));
 
+        btn_my_profile = (Button)findViewById(R.id.btn_my_profile);
         btn_discover_books = (Button)findViewById(R.id.btn_discover_books);
         btn_discover_books.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), DiscoverBooksActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        // Setting onClick listener for My Profile button
+        btn_my_profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
                 startActivity(intent);
             }
         });
