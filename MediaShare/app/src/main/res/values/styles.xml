@@ -16,4 +16,8 @@
         <item name="android:background">@null</item>
     </style>
 
+    <style name="NavigationHeaderImage">
+        <item name="android:shape">oval</item>
+    </style>
+
 </resources>
