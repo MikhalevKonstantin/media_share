@@ -39,4 +39,11 @@
     <string name="title_activity_new_releases">New Releases</string>
     <string name="title_activity_recommended_books">Recommendations</string>
     <string name="title_activity_profile">Profile</string>
+
+    <string-array name="navigation_drawer_array">
+        <item>Dashboard</item>
+        <item>Profile</item>
+        <item>Order History</item>
+        <item>Wish List</item>
+    </string-array>
 </resources>
