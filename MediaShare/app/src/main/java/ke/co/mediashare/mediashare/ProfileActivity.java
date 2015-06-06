@@ -51,12 +51,7 @@ public class ProfileActivity extends ActionBarActivity {
         navigation_list_view.setAdapter(adapter);
         drawerLayout.setDrawerListener(actionBarDrawerToggle);
 
-    }
 
-    @Override
-    protected void onPostCreate(Bundle savedInstanceState) {
-        super.onPostCreate(savedInstanceState);
-        actionBarDrawerToggle.syncState();
     }
 
     @Override
