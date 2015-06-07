@@ -46,4 +46,5 @@
         <item>Order History</item>
         <item>Wish List</item>
     </string-array>
+    <string name="title_activity_admin">Add Books</string>
 </resources>
