@@ -66,7 +66,7 @@ public class SignUpActivity extends Fragment implements View.OnClickListener {
     public void onClick(View view) {
         createUser();
     }
-    
+
     // Method for Creating a new User
     public void createUser() {
         try {
