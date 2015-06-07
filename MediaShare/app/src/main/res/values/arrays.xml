@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="books_categories">
+        <item>New Release</item>
+        <item>Best Seller</item>
+        <item>Recommendation</item>
+    </string-array>
+</resources>
