@@ -38,7 +38,7 @@
     <string name="title_activity_best_sellers">Best Sellers</string>
     <string name="title_activity_new_releases">New Releases</string>
     <string name="title_activity_recommended_books">Recommendations</string>
-    <string name="title_activity_profile">Profile</string>
+    <string name="title_activity_profile">Home</string>
 
     <string name="title_activity_admin">Add Books</string>
     <string name="view_book_thumbnail"><u>View book thumbnail</u></string>

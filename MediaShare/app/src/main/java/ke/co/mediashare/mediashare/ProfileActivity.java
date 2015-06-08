@@ -30,10 +30,11 @@ public class ProfileActivity extends ActionBarActivity {
         setContentView(R.layout.activity_profile);
 
         ActionBar actionBar = getSupportActionBar();
+        actionBar.setHomeAsUpIndicator(R.drawable.ic_action_home);
         actionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.action_bar_color)));
 
         // Set Navigation List image drawables
-        drawer_image_list = new Integer[]{R.drawable.ic_home, R.drawable.ic_profile, R.drawable.ic_order_history, R.drawable.ic_wish_list};
+        drawer_image_list = new Integer[]{R.drawable.ic_profile, R.drawable.ic_order_history, R.drawable.ic_wish_list, R.drawable.ic_action_io};
         // Set the Navigation List Items
         drawer_list_items = getResources().getStringArray(R.array.navigation_drawer_array);
 
