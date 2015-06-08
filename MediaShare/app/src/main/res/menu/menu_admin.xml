@@ -2,12 +2,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="ke.co.mediashare.mediashare.AdminActivity">
-    <item
-        android:id="@+id/action_cancel"
-        android:title="@android:string/cancel"
-        android:orderInCategory="90"
-        app:showAsAction="always"
-        android:icon="@drawable/ic_action_cancel" />
+  
     <item
         android:id="@+id/action_save"
         android:title="@string/action_save"
