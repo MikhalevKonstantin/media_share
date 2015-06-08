@@ -1,6 +1,8 @@
 package ke.co.mediashare.mediashare;
 
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBar.Tab;
@@ -9,32 +11,49 @@ import android.util.Log;
 /**
  * Created by guidovanrossum on 5/28/15.
  */
-public class MediaShareViewPagerAdapter<T extends Fragment> implements ActionBar.TabListener{
+public class MediaShareViewPagerAdapter extends FragmentPagerAdapter {
 
-    private Fragment fragment;
-    private static final String TAG = "media_share_tabs";
+    CharSequence Titles[]; // This will Store the Titles of the Tabs which are Going to be passed when ViewPagerAdapter is created
+    int NumbOfTabs; // Store the number of tabs, this will also be passed when the ViewPagerAdapter is created
 
-    public MediaShareViewPagerAdapter(Fragment fragment){
-        this.fragment = fragment;
-    }
 
-    @Override
-    public void onTabReselected(Tab tab, FragmentTransaction fragmentTransaction) {
-        Log.i(TAG, "Tab " + tab.getText() + " ReSelected");
-    }
+    // Build a Constructor and assign the passed Values to appropriate values in the class
+    public MediaShareViewPagerAdapter(FragmentManager fm, CharSequence mTitles[], int mNumbOfTabsumb) {
+        super(fm);
 
-    @Override
-    public void onTabSelected(Tab tab, FragmentTransaction fragmentTransaction) {
-        fragmentTransaction.replace(R.id.container, fragment, null);
-        Log.i(TAG, "Tab " + tab.getText() + " selected");
+        this.Titles = mTitles;
+        this.NumbOfTabs = mNumbOfTabsumb;
 
     }
 
+    //This method return the fragment for the every position in the View Pager
     @Override
-    public void onTabUnselected(Tab tab, FragmentTransaction fragmentTransaction) {
-        Log.i(TAG, "Tab " + tab.getText() + " UnSelected");
-        if (fragment != null) {
-            fragmentTransaction.remove(fragment);
+    public Fragment getItem(int position) {
+
+        if (position == 0) // if the position is 0 we are returning the First tab
+        {
+            SignInActivity tab1 = new SignInActivity();
+            return tab1;
+        } else             // As we are having 2 tabs if the position is now 0 it must be 1 so we are returning second tab
+        {
+            SignUpActivity tab2 = new SignUpActivity();
+            return tab2;
         }
+
+
+    }
+
+    // This method return the titles for the Tabs in the Tab Strip
+
+    @Override
+    public CharSequence getPageTitle(int position) {
+        return Titles[position];
+    }
+
+    // This method return the Number of tabs for the tabs Strip
+
+    @Override
+    public int getCount() {
+        return NumbOfTabs;
     }
 }
