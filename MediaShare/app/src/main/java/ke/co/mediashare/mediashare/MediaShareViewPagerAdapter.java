@@ -9,12 +9,12 @@ import android.util.Log;
 /**
  * Created by guidovanrossum on 5/28/15.
  */
-public class MediaShareTabListener<T extends Fragment> implements ActionBar.TabListener{
+public class MediaShareViewPagerAdapter<T extends Fragment> implements ActionBar.TabListener{
 
     private Fragment fragment;
     private static final String TAG = "media_share_tabs";
 
-    public MediaShareTabListener(Fragment fragment){
+    public MediaShareViewPagerAdapter(Fragment fragment){
         this.fragment = fragment;
     }
 
