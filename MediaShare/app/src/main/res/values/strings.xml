@@ -40,12 +40,6 @@
     <string name="title_activity_recommended_books">Recommendations</string>
     <string name="title_activity_profile">Profile</string>
 
-    <string-array name="navigation_drawer_array">
-        <item>Home</item>
-        <item>Profile</item>
-        <item>Order History</item>
-        <item>Wish List</item>
-    </string-array>
     <string name="title_activity_admin">Add Books</string>
     <string name="view_book_thumbnail"><u>View book thumbnail</u></string>
     <string name="upload_book">Upload Book</string>
