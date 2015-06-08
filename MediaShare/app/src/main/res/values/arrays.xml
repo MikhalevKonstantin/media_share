@@ -5,4 +5,11 @@
         <item>Best Seller</item>
         <item>Recommendation</item>
     </string-array>
+
+    <string-array name="navigation_drawer_array">
+        <item>Profile</item>
+        <item>Order History</item>
+        <item>Wish List</item>
+        <item>Logout</item>
+    </string-array>
 </resources>
