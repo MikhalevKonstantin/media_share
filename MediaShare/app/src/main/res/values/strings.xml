@@ -22,7 +22,7 @@
     <string name="slide_to_discover">Tap here to discover</string>
     <string name="title_activity_dashboard">User Dashboard</string>
 
-    <string name="my_profile">My Profile</string>
+    <string name="my_profile">My Account</string>
     <string name="discover_books">Discover Books</string>
     <string name="dictionary">Dictionary</string>
     <string name="read_later">Read Later</string>
