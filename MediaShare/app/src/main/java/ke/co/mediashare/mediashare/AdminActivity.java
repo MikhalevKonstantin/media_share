@@ -19,21 +19,8 @@ public class AdminActivity extends ActionBarActivity {
         setContentView(R.layout.activity_admin);
 
         ActionBar actionBar = getSupportActionBar();
+        actionBar.setHomeAsUpIndicator(R.drawable.ic_action_cancel);
         actionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.action_bar_color)));
-    }
-
-    public void bookCategoryChooser(View view){
-        AlertDialog.Builder booksChooserDialog = new AlertDialog.Builder(this);
-        booksChooserDialog.setTitle("Book Category");
-        booksChooserDialog.setItems(R.array.books_categories, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-
-            }
-        });
-        AlertDialog alertDialog = booksChooserDialog.create();
-        alertDialog.show();
-
     }
 
     @Override
