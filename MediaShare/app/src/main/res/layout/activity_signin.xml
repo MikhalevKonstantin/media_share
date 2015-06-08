@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/label_login_email"
         android:text="Email"
-        android:textColor="#ff6600"/>
+        android:textColor="#666666"/>
 
     <EditText
         android:layout_width="match_parent"
@@ -27,7 +27,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/label_login_password"
         android:text="Password"
-        android:textColor="#ff6600"
+        android:textColor="#666666"
         android:layout_below="@+id/editText"/>
 
     <EditText
@@ -37,7 +37,7 @@
         android:ems="10"
         android:id="@+id/editText2"
         android:layout_below="@+id/label_login_password"
-        android:padding="10dp"/>
+        android:padding="10dp" />
 
     <Button
         android:layout_width="wrap_content"
