@@ -4,6 +4,10 @@
     <style name="AppTheme" parent="Theme.AppCompat.NoActionBar">
         <item name="android:windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
+        <item name="colorControlActivated">@color/ControlActivatedColor</item>
+        <item name="colorControlHighlight">@color/ControlHighlightedColor</item>
+        <item name="colorControlNormal">@color/ControlNormalColor</item>
+        <item name="editTextColor">@color/EditTextColor</item>
     </style>
 
     <style name="DashboardButton">
