@@ -11,36 +11,26 @@ import android.util.Log;
 /**
  * Created by guidovanrossum on 5/28/15.
  */
-public class MediaShareViewPagerAdapter extends FragmentPagerAdapter {
+public class MediaShareViewPageAdapter extends FragmentPagerAdapter {
 
     CharSequence Titles[]; // This will Store the Titles of the Tabs which are Going to be passed when ViewPagerAdapter is created
     int NumbOfTabs; // Store the number of tabs, this will also be passed when the ViewPagerAdapter is created
-
+    Fragment fragments[];
 
     // Build a Constructor and assign the passed Values to appropriate values in the class
-    public MediaShareViewPagerAdapter(FragmentManager fm, CharSequence mTitles[], int mNumbOfTabsumb) {
+    public MediaShareViewPageAdapter(FragmentManager fm, CharSequence mTitles[], int mNumbOfTabsumb, Fragment fragments[]) {
         super(fm);
 
         this.Titles = mTitles;
         this.NumbOfTabs = mNumbOfTabsumb;
+        this.fragments = fragments;
 
     }
 
     //This method return the fragment for the every position in the View Pager
     @Override
     public Fragment getItem(int position) {
-
-        if (position == 0) // if the position is 0 we are returning the First tab
-        {
-            SignInActivity tab1 = new SignInActivity();
-            return tab1;
-        } else             // As we are having 2 tabs if the position is now 0 it must be 1 so we are returning second tab
-        {
-            SignUpActivity tab2 = new SignUpActivity();
-            return tab2;
-        }
-
-
+        return fragments[position];
     }
 
     // This method return the titles for the Tabs in the Tab Strip
