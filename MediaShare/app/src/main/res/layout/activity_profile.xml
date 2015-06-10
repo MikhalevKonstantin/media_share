@@ -6,30 +6,28 @@
     android:layout_height="match_parent"
     tools:context="ke.co.mediashare.mediashare.ProfileActivity">
 
-    <include
-        android:id="@+id/toolbar"
-        layout="@layout/tool_bar"
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent" />
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="vertical">
 
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/tool_bar"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent" />
 
-        <ListView
-            android:id="@+id/NavigationListView"
-            android:layout_width="240dp"
-            android:layout_height="match_parent"
-            android:choiceMode="singleChoice"
-            android:divider="#ff6600"
-            android:dividerHeight="1dp"
-            android:background="#ffffff"
-            android:paddingLeft="15sp"
-            android:paddingRight="15sp">
-
-        </ListView>
     </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/navigation_recycler_view"
+        android:layout_width="240dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:scrollbars="vertical"
+        android:background="#ffffff">
+
+    </android.support.v7.widget.RecyclerView>
+
 
 </android.support.v4.widget.DrawerLayout>
