@@ -1,15 +1,13 @@
 package ke.co.mediashare.mediashare;
 
-import android.app.Activity;
-import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 /**
  * Created by guidovanrossum on 6/6/15.
@@ -22,94 +20,77 @@ public class MediaShareListAdapter extends RecyclerView.Adapter<MediaShareListAd
     private String navigation_titles[]; // String array to store the titles of various items of the recycler view
     private int navigation_icons[]; // Int array to store the icons that will be used in the recycler view
 
-    private String profile_name; //String variable that will store the profile name on the recycler header
-    private int profile_photo; //int variable that will store the profile photo on the recycler header
-    private String profile_email; //String variable to store the profile email address on the recycler header
-
+    private String name;
+    private int profile;
+    private String email;
 
     // Creating a ViewHolder which extends the RecyclerView View Holder
     // ViewHolders are used to store the inflated views in order to recycle them
     public static class ViewHolder extends RecyclerView.ViewHolder {
         int holder_id;
-
-        TextView textView;
-        ImageView imageView;
-        ImageView profile;
-        TextView Name;
-        TextView email;
+        TextView viewHolder_textView;
+        ImageView viewHolder_imageView;
+        TextView viewHolder_Name;
+        TextView viewHolder_Email;
+        ImageView viewHolder_Profile;
 
 
         // Creating ViewHolder Constructor with View and viewType as parameters
         public ViewHolder(View itemView, int ViewType) {
             super(itemView);
-
             if (ViewType == TYPE_ITEM) {
-                // Defining the TextView that will hold navigation list items
-                textView = (TextView) itemView.findViewById(R.id.rowText);
-                // Defining the ImageView that will hold the navigation list item's indicators
-                imageView = (ImageView) itemView.findViewById(R.id.rowImage);
+                viewHolder_textView = (TextView) itemView.findViewById(R.id.rowText);
+                viewHolder_imageView = (ImageView) itemView.findViewById(R.id.rowImage);
+                holder_id = 1;
             } else {
-
-                // Defining the TextView that will hold the profile name on the header
-                Name = (TextView) itemView.findViewById(R.id.profile_name);
-                // Defining the TextView that will hold the profile email on the header
-                email = (TextView) itemView.findViewById(R.id.profile_email);
-                // Defining the ImageView that will hold the profile photo on the header
-                profile = (ImageView) itemView.findViewById(R.id.profile_photo);
+                viewHolder_Name = (TextView) itemView.findViewById(R.id.profile_name);
+                viewHolder_Email = (TextView) itemView.findViewById(R.id.profile_email);
+                viewHolder_Profile = (ImageView) itemView.findViewById(R.id.profile_photo);
                 holder_id = 0;
             }
+
+
         }
 
 
     }
 
     // Class Constructor with parameters that will be passed during instantiation
-    MediaShareListAdapter(String Navigation_Titles[], int Navigation_Icons[], String Name, String Email, int Profile) {
+    MediaShareListAdapter(String Navigation_Titles[], int Navigation_Icons[], String Name, String Email, int Profile_Photo) {
         navigation_titles = Navigation_Titles;
         navigation_icons = Navigation_Icons;
-        profile_name = Name;
-        profile_email = Email;
-        profile_photo = Profile;
-
+        name = Name;
+        profile = Profile_Photo;
+        email = Email;
     }
 
     @Override
-    public MediaShareListAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-
-        if (viewType == TYPE_ITEM) {
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int ViewType) {
+        ViewHolder bodyViewHolder;
+        ViewHolder headerViewHolder;
+        if (ViewType == TYPE_ITEM) {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.navigation_drawer_rows, parent, false); //Inflating the layout
-
-            ViewHolder viewHolder = new ViewHolder(view, viewType); //Creating ViewHolder and passing the object of type view
-
-            return viewHolder; // Returning the created object
-
-            //inflate your layout and pass it to view holder
-
-        } else if (viewType == TYPE_HEADER) {
-
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.navigation_header, parent, false); //Inflating the layout
-
-            ViewHolder viewHolder2 = new ViewHolder(view, viewType); //Creating ViewHolder and passing the object of type view
-
-            return viewHolder2; //returning the object created
-
-
+            bodyViewHolder = new ViewHolder(view, ViewType); //Creating ViewHolder and passing the object of type view
+            return bodyViewHolder;
+        } else if (ViewType == TYPE_HEADER) {
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.navigation_header, parent, false);
+            headerViewHolder = new ViewHolder(view, ViewType);
+            return headerViewHolder;
         }
         return null;
-
     }
 
     @Override
     public void onBindViewHolder(MediaShareListAdapter.ViewHolder holder, int position) {
         if (holder.holder_id == 1) {
-            holder.textView.setText(navigation_titles[position - 1]);
-            holder.imageView.setImageResource(navigation_icons[position - 1]);
+            holder.viewHolder_textView.setText(navigation_titles[position - 1]);
+            holder.viewHolder_imageView.setImageResource(navigation_icons[position - 1]);
         } else {
-
-            holder.profile.setImageResource(profile_photo);
-            holder.Name.setText(profile_name);
-            holder.email.setText(profile_email);
+            holder.viewHolder_Profile.setImageResource(profile);
+            holder.viewHolder_Name.setText(name);
+            holder.viewHolder_Email.setText(email);
         }
+
     }
 
     // This method returns the number of items present in the list
@@ -118,6 +99,7 @@ public class MediaShareListAdapter extends RecyclerView.Adapter<MediaShareListAd
         return navigation_titles.length + 1;
     }
 
+    // With the following method we check what type of view is being passed
     @Override
     public int getItemViewType(int position) {
         if (isPositionHeader(position))
@@ -129,6 +111,7 @@ public class MediaShareListAdapter extends RecyclerView.Adapter<MediaShareListAd
     private boolean isPositionHeader(int position) {
         return position == 0;
     }
+
 
 }
 
