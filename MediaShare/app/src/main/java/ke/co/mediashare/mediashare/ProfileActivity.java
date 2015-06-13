@@ -16,12 +16,12 @@ public class ProfileActivity extends ActionBarActivity {
     private String[] drawer_list_items;
     private int[] drawer_image_list;
     private Toolbar toolbar;
-    private String profile_name = "Dennis Mwebia";
-    private String profile_email = "dennis@mediashare.co.ke";
-    private int profile_photo = R.drawable.read_later;
     private RecyclerView recyclerView;
     private RecyclerView.Adapter recylerAdapter;
     private RecyclerView.LayoutManager recyclerLayoutManager;
+    private String name = "Dennis Mwebia";
+    private String email = "mwebia@live.com";
+    private int photo = R.drawable.read_later;
 
 
     @Override
@@ -31,6 +31,7 @@ public class ProfileActivity extends ActionBarActivity {
 
         // Defining Toolbar
         toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setNavigationIcon(R.drawable.ic_action_drawer);
         setSupportActionBar(toolbar);
 
         // Set Navigation List image drawables
@@ -41,7 +42,7 @@ public class ProfileActivity extends ActionBarActivity {
         // Set the Navigation RecycleView
         recyclerView = (RecyclerView) findViewById(R.id.navigation_recycler_view);
         recyclerView.setHasFixedSize(true);
-        recylerAdapter = new MediaShareListAdapter(drawer_list_items, drawer_image_list, profile_name, profile_email, profile_photo);
+        recylerAdapter = new MediaShareListAdapter(drawer_list_items, drawer_image_list, name, email, photo);
         recyclerView.setAdapter(recylerAdapter);
         recyclerLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(recyclerLayoutManager);
@@ -65,6 +66,5 @@ public class ProfileActivity extends ActionBarActivity {
         drawerLayout.setDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
     }
-
-
+    
 }
