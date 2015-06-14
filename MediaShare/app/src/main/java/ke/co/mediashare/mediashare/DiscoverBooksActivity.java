@@ -13,6 +13,7 @@ import android.view.View;
 
 public class DiscoverBooksActivity extends ActionBarActivity {
     Toolbar toolbar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,7 +34,6 @@ public class DiscoverBooksActivity extends ActionBarActivity {
         fragments = new Fragment[]{newReleasesActivity, bestSellersActivity, recommendedBooksActivity};
 
         toolbar = (Toolbar) findViewById(R.id.toolbar_discover_books);
-        toolbar.setNavigationIcon(R.drawable.ic_action_drawer);
         setSupportActionBar(toolbar);
 
         pagerAdapter = new MediaShareViewPageAdapter(getSupportFragmentManager(), tabTitles, number_of_tabs, fragments);
