@@ -33,20 +33,12 @@
             android:label="@string/title_activity_signup" >
         </activity>
         <activity
-            android:name=".DashboardActivity"
-            android:label="@string/title_activity_dashboard"
-            android:parentActivityName=".LoginActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="ke.co.mediashare.mediashare.LoginActivity" />
-        </activity>
-        <activity
             android:name=".DiscoverBooksActivity"
             android:label="@string/title_activity_discover_books"
-            android:parentActivityName=".DashboardActivity" >
+            android:parentActivityName=".DiscoverBooksActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="ke.co.mediashare.mediashare.DashboardActivity" />
+                android:value="ke.co.mediashare.mediashare.DiscoverBooksActivity" />
         </activity>
         <activity
             android:name=".BestSellersActivity"
@@ -63,18 +55,18 @@
         <activity
             android:name=".ProfileActivity"
             android:label="@string/title_activity_profile"
-            android:parentActivityName=".DashboardActivity" >
+            android:parentActivityName=".DiscoverBooksActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="ke.co.mediashare.mediashare.DashboardActivity" />
+                android:value="ke.co.mediashare.mediashare.DiscoverBooksActivity" />
         </activity>
         <activity
             android:name=".AdminActivity"
             android:label="@string/title_activity_admin"
-            android:parentActivityName=".DashboardActivity" >
+            android:parentActivityName=".DiscoverBooksActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="ke.co.mediashare.mediashare.DashboardActivity" />
+                android:value="ke.co.mediashare.mediashare.DiscoverBooksActivity" />
         </activity>
     </application>
 

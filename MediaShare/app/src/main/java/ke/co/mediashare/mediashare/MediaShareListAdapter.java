@@ -112,6 +112,5 @@ public class MediaShareListAdapter extends RecyclerView.Adapter<MediaShareListAd
         return position == 0;
     }
 
-
 }
 

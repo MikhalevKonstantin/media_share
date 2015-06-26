@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="ToolbarColor">#ff6600</color>
-    <color name="ControlNormalColor">#999999</color>
+    <color name="ControlNormalColor">#ffffff</color>
     <color name="ControlActivatedColor">#ff6600</color>
     <color name="ControlHighlightedColor">#ffccaa</color>
     <color name="EditTextColor">#000000</color>
     <color name="TabScrollColor">#ffccaa</color>
+    <color name="White">#ffffff</color>
+    <color name="Gray">#999999</color>
 </resources>

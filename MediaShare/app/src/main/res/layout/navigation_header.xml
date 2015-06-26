@@ -2,7 +2,7 @@
     xmlns:app="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="178dp"
-    android:background="@drawable/splash_image"
+    android:background="#ff6600"
     android:orientation="vertical"
     android:weightSum="1">
 
@@ -40,7 +40,7 @@
     <de.hdodenhof.circleimageview.CircleImageView
         android:layout_width="70dp"
         android:layout_height="70dp"
-        android:src="@drawable/read_later"
+        android:src="@drawable/ic_profile_image"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginTop="38dp"

@@ -1,5 +1,6 @@
 package ke.co.mediashare.mediashare;
 
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
@@ -8,98 +9,170 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.view.GestureDetector;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Toast;
 
 public class DiscoverBooksActivity extends ActionBarActivity {
-    Toolbar toolbar;
+	Toolbar toolbar;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        MediaShareViewPageAdapter pagerAdapter;
-        SlidingTabLayout slidingTabLayout;
-        ViewPager viewPager;
-        CharSequence[] tabTitles = {"New Releases", "Best Sellers", "Recommendations"};
-        int number_of_tabs = 3;
-        Fragment[] fragments;
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		MediaShareViewPageAdapter pagerAdapter;
+		SlidingTabLayout slidingTabLayout;
+		ViewPager viewPager;
+		CharSequence[] tabTitles = {"New Releases", "Best Sellers", "Recommendations"};
+		int number_of_tabs = 3;
+		Fragment[] fragments;
+		SearchView searchView;
 
-        setContentView(R.layout.activity_discover_books);
-        // Setting up Fragments
-        NewReleasesActivity newReleasesActivity = new NewReleasesActivity();
-        BestSellersActivity bestSellersActivity = new BestSellersActivity();
-        RecommendedBooksActivity recommendedBooksActivity = new RecommendedBooksActivity();
+		setContentView(R.layout.activity_discover_books);
+		// Setting up Fragments
+		NewReleasesActivity newReleasesActivity = new NewReleasesActivity();
+		BestSellersActivity bestSellersActivity = new BestSellersActivity();
+		RecommendedBooksActivity recommendedBooksActivity = new RecommendedBooksActivity();
 
-        // Assigning instantiated Fragments to the Fragments array
-        fragments = new Fragment[]{newReleasesActivity, bestSellersActivity, recommendedBooksActivity};
+		// Assigning instantiated Fragments to the Fragments array
+		fragments = new Fragment[]{newReleasesActivity, bestSellersActivity, recommendedBooksActivity};
 
-        toolbar = (Toolbar) findViewById(R.id.toolbar_discover_books);
-        setSupportActionBar(toolbar);
+		// Setting up Toolbar
+		toolbar = (Toolbar) findViewById(R.id.toolbar_discover_books);
+		toolbar.inflateMenu(R.menu.menu_discover_books);
+		setSupportActionBar(toolbar);
 
-        pagerAdapter = new MediaShareViewPageAdapter(getSupportFragmentManager(), tabTitles, number_of_tabs, fragments);
-        viewPager = (ViewPager) findViewById(R.id.viewPager_discover_books);
-        viewPager.setAdapter(pagerAdapter);
+		// Setting up SearchView
+		searchView = (SearchView) toolbar.getMenu().findItem(R.id.action_search).getActionView();
+		searchView.setQueryHint("Search Books");
+		searchView.setIconified(true);
 
-        slidingTabLayout = (SlidingTabLayout) findViewById(R.id.tabs_discover_books);
-        slidingTabLayout.setDistributeEvenly(true);
-        slidingTabLayout.setViewPager(viewPager);
-        slidingTabLayout.setViewPager(viewPager);
+		pagerAdapter = new MediaShareViewPageAdapter(getSupportFragmentManager(), tabTitles, number_of_tabs, fragments);
+		viewPager = (ViewPager) findViewById(R.id.viewPager_discover_books);
+		viewPager.setAdapter(pagerAdapter);
 
-        slidingTabLayout.setCustomTabColorizer(new SlidingTabLayout.TabColorizer() {
-            @Override
-            public int getIndicatorColor(int position) {
-                return getResources().getColor(R.color.TabScrollColor);
-            }
-        });
+		slidingTabLayout = (SlidingTabLayout) findViewById(R.id.tabs_discover_books);
+		slidingTabLayout.setDistributeEvenly(true);
+		slidingTabLayout.setViewPager(viewPager);
+		slidingTabLayout.setViewPager(viewPager);
 
-        setUpDrawer();
+		slidingTabLayout.setCustomTabColorizer(new SlidingTabLayout.TabColorizer() {
+			@Override
+			public int getIndicatorColor(int position) {
+				return getResources().getColor(R.color.TabScrollColor);
+			}
+		});
 
-    }
+		setUpDrawer();
 
-    // Method for setting up a Drawer
-    public void setUpDrawer() {
-        DrawerLayout drawerLayout;
-        ActionBarDrawerToggle actionBarDrawerToggle;
-        String[] drawer_list_items;
-        int[] drawer_image_list;
-        RecyclerView recyclerView;
-        RecyclerView.Adapter recyclerAdapter;
-        RecyclerView.LayoutManager recyclerLayoutManager;
-        String name = "Dennis Mwebia";
-        String email = "mwebia@live.com";
-        int photo = R.drawable.read_later;
+	}
 
-        // Set Navigation List image drawables
-        drawer_image_list = new int[]{R.drawable.ic_home, R.drawable.ic_profile, R.drawable.ic_order_history, R.drawable.ic_wish_list, R.drawable.ic_action_io};
-        // Set the Navigation List Items
-        drawer_list_items = getResources().getStringArray(R.array.discover_books_drawer_array);
+	// Method for setting up a Drawer
+	public void setUpDrawer() {
+		final DrawerLayout drawerLayout;
+		ActionBarDrawerToggle actionBarDrawerToggle;
+		String[] drawer_list_items;
+		int[] drawer_image_list;
+		RecyclerView recyclerView;
+		RecyclerView.Adapter recyclerAdapter;
+		RecyclerView.LayoutManager recyclerLayoutManager;
+		String name = "Dennis Mwebia";
+		String email = "mwebia@live.com";
+		int photo = R.drawable.ic_profile_image;
 
-        // Set the Navigation RecycleView
-        recyclerView = (RecyclerView) findViewById(R.id.discover_books_navigation_recycler_view);
-        recyclerView.setHasFixedSize(true);
-        recyclerAdapter = new MediaShareListAdapter(drawer_list_items, drawer_image_list, name, email, photo);
-        recyclerView.setAdapter(recyclerAdapter);
-        recyclerLayoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(recyclerLayoutManager);
+		// Set the DrawerLayout
+		drawerLayout = (DrawerLayout) findViewById(R.id.books_drawer_layout);
+		// Set Navigation List image drawables
+		drawer_image_list = new int[]{R.drawable.ic_action_my_account, R.drawable.ic_action_dictionary, R.drawable.ic_action_read_later, R.drawable.ic_action_my_library, R.drawable.ic_action_settings};
+		// Set the Navigation List Items
+		drawer_list_items = getResources().getStringArray(R.array.discover_books_drawer_array);
 
-        // Set the DrawerLayout
-        drawerLayout = (DrawerLayout) findViewById(R.id.books_drawer_layout);
+		// Set the Navigation RecycleView
+		recyclerView = (RecyclerView) findViewById(R.id.discover_books_navigation_recycler_view);
+		recyclerView.setHasFixedSize(true);
+		recyclerAdapter = new MediaShareListAdapter(drawer_list_items, drawer_image_list, name, email, photo);
+		recyclerView.setAdapter(recyclerAdapter);
 
-        // Set the ActionBarDrawerToggle
-        actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.my_profile, R.string.my_profile) {
-            public void onDrawerOpened(View drawerView) {
-                super.onDrawerOpened(drawerView);
-                toolbar.setTitle("Discover Books");
-            }
+		// Defining GestureDetector Object
+		final GestureDetector gestureDetector = new GestureDetector(this, new GestureDetector.SimpleOnGestureListener() {
+			@Override
+			public boolean onSingleTapUp(MotionEvent motionEvent) {
 
-            public void onDrawerClosed(View drawerView) {
-                super.onDrawerClosed(drawerView);
-                toolbar.setTitle("Discover Books");
-            }
-        };
+				return true;
+			}
 
-        drawerLayout.setDrawerListener(actionBarDrawerToggle);
-        actionBarDrawerToggle.syncState();
-    }
+		});
+		recyclerView.addOnItemTouchListener(new RecyclerView.OnItemTouchListener() {
+			@Override
+			public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent e) {
+				View child = rv.findChildViewUnder(e.getX(), e.getY());
+				if (child != null && gestureDetector.onTouchEvent(e)) {
+					drawerLayout.closeDrawers();
+					switch (rv.getChildPosition(child)) {
+						case 1:
+							Intent profileIntent = new Intent(DiscoverBooksActivity.this, ProfileActivity.class);
+							startActivity(profileIntent);
+							break;
+						case 5:
+							Intent adminIntent = new Intent(DiscoverBooksActivity.this, AdminActivity.class);
+							startActivity(adminIntent);
+							break;
+					}
+
+					return true;
+				}
+				return false;
+			}
+
+			@Override
+			public void onTouchEvent(RecyclerView rv, MotionEvent e) {
+
+			}
+		});
+		recyclerLayoutManager = new LinearLayoutManager(this);
+		recyclerView.setLayoutManager(recyclerLayoutManager);
+
+		// Set the ActionBarDrawerToggle
+		actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.title_activity_discover_books, R.string.title_activity_discover_books) {
+			public void onDrawerOpened(View drawerView) {
+				super.onDrawerOpened(drawerView);
+
+			}
+
+			public void onDrawerClosed(View drawerView) {
+				super.onDrawerClosed(drawerView);
+
+			}
+		};
+
+		drawerLayout.setDrawerListener(actionBarDrawerToggle);
+		actionBarDrawerToggle.syncState();
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.menu_discover_books, menu);
+		return true;
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// Handle action bar item clicks here. The action bar will
+		// automatically handle clicks on the Home/Up button, so long
+		// as you specify a parent activity in AndroidManifest.xml.
+		int id = item.getItemId();
+
+		//noinspection SimplifiableIfStatement
+		if (id == R.id.action_search) {
+			return true;
+		}
+
+		return super.onOptionsItemSelected(item);
+	}
 
 }

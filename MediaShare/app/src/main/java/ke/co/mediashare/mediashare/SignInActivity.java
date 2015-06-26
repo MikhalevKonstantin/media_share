@@ -2,11 +2,8 @@ package ke.co.mediashare.mediashare;
 
 import android.content.Intent;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -35,7 +32,7 @@ public class SignInActivity extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
-        Intent intent = new Intent(view.getContext(), DashboardActivity.class);
+        Intent intent = new Intent(view.getContext(), DiscoverBooksActivity.class);
         startActivity(intent);
     }
 

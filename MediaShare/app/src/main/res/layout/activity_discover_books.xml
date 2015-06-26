@@ -47,7 +47,7 @@
             android:layout_height="match_parent"
             android:layout_gravity="start"
             android:scrollbars="vertical"
-            android:background="#ffffff"></android.support.v7.widget.RecyclerView>
+            android:background="#ffffff"/>
     </android.support.v4.widget.DrawerLayout>
 
 </FrameLayout>

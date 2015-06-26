@@ -8,6 +8,13 @@
         <item name="colorControlHighlight">@color/ControlHighlightedColor</item>
         <item name="colorControlNormal">@color/ControlNormalColor</item>
         <item name="editTextColor">@color/EditTextColor</item>
+        <item name="searchViewStyle">@style/SearchViewStyle</item>
+    </style>
+
+    <style name="SearchViewStyle" parent="Widget.AppCompat.SearchView">
+        <item name="queryHint">@string/action_search</item>
+        <item name="colorAccent">@color/White</item>
+
     </style>
 
     <style name="DashboardButton">
