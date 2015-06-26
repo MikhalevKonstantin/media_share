@@ -28,7 +28,7 @@
     <string name="read_later">Read Later</string>
     <string name="my_library">My Library</string>
     <string name="admin">Admin</string>
-    <string name="title_activity_discover_books">\</string>
+    <string name="title_activity_discover_books">Discover Books</string>
 
     <string name="title_section1">Section 1</string>
     <string name="title_section2">Section 2</string>
@@ -38,7 +38,7 @@
     <string name="title_activity_best_sellers">Best Sellers</string>
     <string name="title_activity_new_releases">New Releases</string>
     <string name="title_activity_recommended_books">Recommendations</string>
-    <string name="title_activity_profile">Home</string>
+    <string name="title_activity_profile">My Profile</string>
 
     <string name="title_activity_admin">Add Books</string>
     <string name="view_book_thumbnail"><u>View book thumbnail</u></string>
