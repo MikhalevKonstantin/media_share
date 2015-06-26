@@ -117,6 +117,14 @@ public class DiscoverBooksActivity extends ActionBarActivity {
 							Intent profileIntent = new Intent(DiscoverBooksActivity.this, ProfileActivity.class);
 							startActivity(profileIntent);
 							break;
+						case 3:
+							Intent readlaterIntent = new Intent(DiscoverBooksActivity.this, ReadLaterListActivity.class);
+							startActivity(readlaterIntent);
+							break;
+						case 4:
+							Intent libraryIntent = new Intent(DiscoverBooksActivity.this, MyLibraryActivity.class);
+							startActivity(libraryIntent);
+							break;
 						case 5:
 							Intent adminIntent = new Intent(DiscoverBooksActivity.this, AdminActivity.class);
 							startActivity(adminIntent);

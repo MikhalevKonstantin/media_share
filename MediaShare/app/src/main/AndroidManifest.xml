@@ -68,6 +68,22 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="ke.co.mediashare.mediashare.DiscoverBooksActivity" />
         </activity>
+        <activity
+            android:name=".MyLibraryActivity"
+            android:label="@string/title_activity_my_library"
+            android:parentActivityName=".DiscoverBooksActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="ke.co.mediashare.mediashare.DiscoverBooksActivity" />
+        </activity>
+        <activity
+            android:name=".ReadLaterListActivity"
+            android:label="@string/title_activity_read_later_list"
+            android:parentActivityName=".DiscoverBooksActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="ke.co.mediashare.mediashare.DiscoverBooksActivity" />
+        </activity>
     </application>
 
 </manifest>
