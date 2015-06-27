@@ -18,6 +18,8 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Toast;
 
+import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
+
 public class DiscoverBooksActivity extends ActionBarActivity {
 	Toolbar toolbar;
 
