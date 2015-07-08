@@ -7,9 +7,18 @@
     </string-array>
 
     <string-array name="navigation_drawer_array">
+        <item>Home</item>
         <item>Profile</item>
         <item>Order History</item>
         <item>Wish List</item>
         <item>Logout</item>
+    </string-array>
+
+    <string-array name="discover_books_drawer_array">
+        <item>My Account</item>
+        <item>Dictionary</item>
+        <item>Read Later List</item>
+        <item>My Library</item>
+        <item>Admin</item>
     </string-array>
 </resources>
