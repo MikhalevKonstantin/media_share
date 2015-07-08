@@ -1,26 +1,23 @@
 package ke.co.mediashare.mediashare;
 
-import android.content.DialogInterface;
-import android.graphics.drawable.ColorDrawable;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.app.AlertDialog;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-
 
 public class AdminActivity extends ActionBarActivity {
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin);
 
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setHomeAsUpIndicator(R.drawable.ic_action_cancel);
-        actionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.action_bar_color)));
+        toolbar = (Toolbar)findViewById(R.id.toolbar_admin);
+        toolbar.setNavigationIcon(R.drawable.ic_action_cancel);
+        setSupportActionBar(toolbar);
+
     }
 
     @Override

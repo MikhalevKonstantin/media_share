@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">MediaShare</string>
     <string name="action_save">Save</string>
-    <string name="action_settings">Settings</string>
+    <string name="action_search">Search</string>
     <string name="hint_login_email">Email</string>
     <string name="hint_login_password">Password</string>
     <string name="title_activity_login">MediaShare</string>
@@ -16,10 +16,10 @@
     <string name="hint_password">Password</string>
     <string name="hint_confirm_password">Confirm Password</string>
     <string name="signup_checkbox_text"><u>I agree to the terms of service</u></string>
-    <string name="tag_line">OPENING YOU UP TO THE WORLD OF BOOKS!</string>
+    <string name="tag_line">Opening you up to the world of books</string>
     <string name="hello">Hello!</string>
     <string name="welcome">Welcome to&#160;</string>
-    <string name="slide_to_discover">Tap here to discover</string>
+    <string name="slide_to_discover"><b>TAP HERE TO DISCOVER</b></string>
     <string name="title_activity_dashboard">User Dashboard</string>
 
     <string name="my_profile">My Account</string>
@@ -38,7 +38,7 @@
     <string name="title_activity_best_sellers">Best Sellers</string>
     <string name="title_activity_new_releases">New Releases</string>
     <string name="title_activity_recommended_books">Recommendations</string>
-    <string name="title_activity_profile">Home</string>
+    <string name="title_activity_profile">My Profile</string>
 
     <string name="title_activity_admin">Add Books</string>
     <string name="view_book_thumbnail"><u>View book thumbnail</u></string>
@@ -48,4 +48,7 @@
     <string name="book_price">Book Price (Ksh)</string>
     <string name="book_name">Book Name</string>
     <string name="login">Login</string>
+    <string name="title_activity_my_library">My Library</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_read_later_list">Read Later List</string>
 </resources>

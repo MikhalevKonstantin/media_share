@@ -1,29 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/DrawerLayout"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="ke.co.mediashare.mediashare.ProfileActivity">
 
-    <LinearLayout
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              android:background="@color/White"
+              tools:context="ke.co.mediashare.mediashare.ProfileActivity">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/tool_bar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_height="wrap_content"/>
 
+    <include
+        layout="@layout/layout_profile_items"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:layout_below="@id/toolbar"/>
 
-        <ListView
-            android:id="@+id/NavigationListView"
-            android:layout_width="240dp"
-            android:layout_height="match_parent"
-            android:choiceMode="singleChoice"
-            android:divider="#ff6600"
-            android:dividerHeight="1dp"
-            android:background="#ffffff"
-            android:paddingLeft="15sp"
-            android:paddingRight="15sp">
-
-        </ListView>
-    </LinearLayout>
-
-</android.support.v4.widget.DrawerLayout>
+</RelativeLayout>
