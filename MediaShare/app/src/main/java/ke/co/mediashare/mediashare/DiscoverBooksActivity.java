@@ -1,5 +1,6 @@
 package ke.co.mediashare.mediashare;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -7,6 +8,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
@@ -16,9 +18,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Toast;
-
-import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
 
 public class DiscoverBooksActivity extends ActionBarActivity {
 	Toolbar toolbar;
@@ -89,14 +88,14 @@ public class DiscoverBooksActivity extends ActionBarActivity {
 		// Set the DrawerLayout
 		drawerLayout = (DrawerLayout) findViewById(R.id.books_drawer_layout);
 		// Set Navigation List image drawables
-		drawer_image_list = new int[]{R.drawable.ic_action_my_account, R.drawable.ic_action_dictionary, R.drawable.ic_action_read_later, R.drawable.ic_action_my_library, R.drawable.ic_action_settings};
+		drawer_image_list = new int[]{R.drawable.ic_action_profile, R.drawable.ic_action_dictionary, R.drawable.ic_action_read_later, R.drawable.ic_action_library, R.drawable.ic_action_settings, R.drawable.ic_action_faq, R.drawable.ic_action_logout};
 		// Set the Navigation List Items
 		drawer_list_items = getResources().getStringArray(R.array.discover_books_drawer_array);
 
 		// Set the Navigation RecycleView
 		recyclerView = (RecyclerView) findViewById(R.id.discover_books_navigation_recycler_view);
 		recyclerView.setHasFixedSize(true);
-		recyclerAdapter = new MediaShareListAdapter(drawer_list_items, drawer_image_list, name, email, photo);
+		recyclerAdapter = new MediaShareNavigationDrawerAdapter(drawer_list_items, drawer_image_list, name, email, photo);
 		recyclerView.setAdapter(recyclerAdapter);
 
 		// Defining GestureDetector Object
@@ -119,6 +118,10 @@ public class DiscoverBooksActivity extends ActionBarActivity {
 							Intent profileIntent = new Intent(DiscoverBooksActivity.this, ProfileActivity.class);
 							startActivity(profileIntent);
 							break;
+						case 2:
+							Intent dictionaryIntent = new Intent(DiscoverBooksActivity.this, DictionaryActivity.class);
+							startActivity(dictionaryIntent);
+							break;
 						case 3:
 							Intent readlaterIntent = new Intent(DiscoverBooksActivity.this, ReadLaterListActivity.class);
 							startActivity(readlaterIntent);
@@ -131,6 +134,27 @@ public class DiscoverBooksActivity extends ActionBarActivity {
 							Intent adminIntent = new Intent(DiscoverBooksActivity.this, AdminActivity.class);
 							startActivity(adminIntent);
 							break;
+
+						case 7:
+							AlertDialog.Builder logoutBuilder = new AlertDialog.Builder(DiscoverBooksActivity.this);
+							logoutBuilder.setTitle("Logout");
+							logoutBuilder.setMessage("Are you sure you want to logout?");
+							logoutBuilder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+								@Override
+								public void onClick(DialogInterface dialog, int which) {
+
+								}
+							});
+							logoutBuilder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+								@Override
+								public void onClick(DialogInterface dialog, int which) {
+
+								}
+							});
+
+							AlertDialog alertDialog = logoutBuilder.create();
+							alertDialog.show();
+							break;
 					}
 
 					return true;
@@ -140,6 +164,11 @@ public class DiscoverBooksActivity extends ActionBarActivity {
 
 			@Override
 			public void onTouchEvent(RecyclerView rv, MotionEvent e) {
+
+			}
+
+			@Override
+			public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
 
 			}
 		});

@@ -84,6 +84,22 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="ke.co.mediashare.mediashare.DiscoverBooksActivity" />
         </activity>
+        <activity
+            android:name=".BookReaderActivity"
+            android:label="@string/title_activity_book_reader"
+            android:parentActivityName=".DiscoverBooksActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="ke.co.mediashare.mediashare.DiscoverBooksActivity" />
+        </activity>
+        <activity
+            android:name=".DictionaryActivity"
+            android:label="@string/title_activity_dictionary"
+            android:parentActivityName=".DiscoverBooksActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="ke.co.mediashare.mediashare.DiscoverBooksActivity" />
+        </activity>
     </application>
 
 </manifest>

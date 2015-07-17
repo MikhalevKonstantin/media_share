@@ -1,0 +1,20 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:context="ke.co.mediashare.mediashare.DictionaryActivity">
+
+    <include
+        android:id="@+id/dictionary_toolbar"
+        layout="@layout/tool_bar"/>
+
+    <ListView
+        android:id="@+id/dictionary_listView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#ffffff"
+        android:divider="#666666"
+        android:dividerHeight="1dp"
+        android:layout_below="@+id/dictionary_toolbar"/>
+
+</RelativeLayout>

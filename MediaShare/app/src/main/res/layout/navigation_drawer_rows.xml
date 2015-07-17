@@ -2,45 +2,33 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
+              android:layout_marginBottom="1dp"
+              android:clickable="true"
+              android:background="@drawable/navigation_drawer_background"
               android:orientation="horizontal"
               android:paddingBottom="8dp"
-              android:paddingLeft="16dp"
-              android:paddingRight="16dp"
               android:paddingTop="8dp">
 
-    <android.support.v7.widget.CardView
-        android:layout_width="match_parent"
+    <ImageView
+        android:id="@+id/rowImage"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:clickable="true"
-        android:focusable="true"
-        android:background="?android:attr/selectableItemBackground">
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:contentDescription="@string/welcome"
+        android:paddingTop="8dp"
+        android:src="@drawable/ic_action_drawer"/>
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="8dp">
+    <ke.co.mediashare.mediashare.NavigationDrawerTextView
+        android:id="@+id/rowText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:paddingTop="16dp"
+        android:text="Medium Text"
+        android:textColor="#666666"
+        android:textSize="14sp"/>
 
-            <ImageView
-                android:id="@+id/rowImage"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:contentDescription="@string/welcome"
-                android:src="@drawable/ic_action_my_account"/>
-
-            <TextView
-                android:id="@+id/rowText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_toEndOf="@+id/rowImage"
-                android:layout_toRightOf="@+id/rowImage"
-                android:layout_marginLeft="48dp"
-                android:layout_marginRight="48dp"
-                android:text="Medium Text"
-                android:textColor="#666666"
-                android:textSize="14sp"/>
-        </RelativeLayout>
-
-    </android.support.v7.widget.CardView>
 
 </LinearLayout>

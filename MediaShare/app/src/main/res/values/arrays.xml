@@ -15,10 +15,12 @@
     </string-array>
 
     <string-array name="discover_books_drawer_array">
-        <item>My Account</item>
+        <item>My Profile</item>
         <item>Dictionary</item>
         <item>Read Later List</item>
         <item>My Library</item>
-        <item>Admin</item>
+        <item>Settings</item>
+        <item>App FAQ</item>
+        <item>Logout</item>
     </string-array>
 </resources>

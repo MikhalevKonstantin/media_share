@@ -51,4 +51,9 @@
     <string name="title_activity_my_library">My Library</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_read_later_list">Read Later List</string>
+    <string name="title_activity_book_reader">MS Reader</string>
+    <string name="title_activity_dictionary">Dictionary</string>
+
+    <string name="dictionary_search">Dictionary Search</string>
+
 </resources>
