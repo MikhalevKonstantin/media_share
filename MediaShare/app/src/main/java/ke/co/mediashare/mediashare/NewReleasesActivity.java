@@ -44,7 +44,7 @@ public class NewReleasesActivity extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		final View view = inflater.inflate(R.layout.activity_new_releases, container, false);
 
-		bookOptions = new CharSequence[]{"Open", "Buy", "Rent","Add to library", "Read later"};
+		bookOptions = new CharSequence[]{"Open with MS Reader", "Open with another application", "Buy", "Rent", "Add to library", "Read later"};
 		setUpBooks();
 		recyclerView = (RecyclerView) view.findViewById(R.id.new_release_books_recyclerView);
 		recyclerView.setHasFixedSize(true);
@@ -75,10 +75,12 @@ public class NewReleasesActivity extends Fragment {
 						public void onClick(DialogInterface dialog, int which) {
 
 							// If the option selected is Open, then open the selected PDF file
-							if (bookOptions[which] == "Open") {
+							if (bookOptions[which] == "Open with MS Reader") {
 
 								Intent intent = new Intent(getActivity(), BookReaderActivity.class);
 								startActivity(intent);
+							} else if (bookOptions[which] == "Open with another application") {
+								readPDF();
 							}
 
 						}
@@ -107,27 +109,55 @@ public class NewReleasesActivity extends Fragment {
 		bookThumbnails = new ArrayList<>();
 		bookThumbnails.add(R.drawable.book_building_websites_with_joomla);
 		bookThumbnails.add(R.drawable.book_complete_reference);
-		bookThumbnails.add(R.drawable.book_hardening_linux);
-		bookThumbnails.add(R.drawable.book_zend_framework_in_action);
+		bookThumbnails.add(R.drawable.novel_ghost_hand);
+		bookThumbnails.add(R.drawable.novel_black_hand_gang);
+		bookThumbnails.add(R.drawable.novel_cool_hand_look);
+		bookThumbnails.add(R.drawable.novel_fight_less_love_more);
+		bookThumbnails.add(R.drawable.novel_the_god_father);
+		bookThumbnails.add(R.drawable.novel_lord_john);
 
 		bookTitles = new ArrayList<>();
 		bookTitles.add("Building Websites With Joomla");
 		bookTitles.add("The Complete C++ Reference");
-		bookTitles.add("Hardening Linux");
-		bookTitles.add("Zend Framework In Action");
+		bookTitles.add("Ghost Hand");
+		bookTitles.add("Black Hand Gang");
+		bookTitles.add("Cool Hand Look");
+		bookTitles.add("Fight Less Love More");
+		bookTitles.add("The God Father");
+		bookTitles.add("Lord John");
 
 		bookAuthors = new ArrayList<>();
 		bookAuthors.add("Hagen Graf");
 		bookAuthors.add("Herbert Schildt");
-		bookAuthors.add("James Tumbull");
 		bookAuthors.add("Rob Allen");
+		bookAuthors.add("Pat Kellemer");
+		bookAuthors.add("Donn Pearce");
+		bookAuthors.add("Laurie Pann");
+		bookAuthors.add("Mario Puzo");
+		bookAuthors.add("Diana Gabaldon");
 
 		bookYearOfProduction = new ArrayList<>();
 		bookYearOfProduction.add("(2006)");
 		bookYearOfProduction.add("(2009)");
-		bookYearOfProduction.add("(2005)");
 		bookYearOfProduction.add("(2007)");
+		bookYearOfProduction.add("(2007)");
+		bookYearOfProduction.add("(2007)");
+		bookYearOfProduction.add("(2007)");
+		bookYearOfProduction.add("(2008)");
+		bookYearOfProduction.add("(2008)");
 	}
 
-
+	public void readPDF() {
+		try {
+			File pdfFile = new File("/storage/sdcard0/Applied_Cryptography.pdf");
+			Uri path = Uri.fromFile(pdfFile);
+			Intent intent = new Intent(Intent.ACTION_VIEW);
+			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			intent.setDataAndType(path, "application/pdf");
+			startActivity(intent);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 }
+

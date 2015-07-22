@@ -100,24 +100,44 @@ public class ReadLaterListActivity extends ActionBarActivity {
 		bookThumbnails.add(R.drawable.book_complete_reference);
 		bookThumbnails.add(R.drawable.book_hardening_linux);
 		bookThumbnails.add(R.drawable.book_zend_framework_in_action);
+		bookThumbnails.add(R.drawable.novel_black_hand_gang);
+		bookThumbnails.add(R.drawable.novel_cool_hand_look);
+		bookThumbnails.add(R.drawable.novel_fight_less_love_more);
+		bookThumbnails.add(R.drawable.novel_the_god_father);
+		bookThumbnails.add(R.drawable.novel_lord_john);
 
 		bookTitles = new ArrayList<>();
 		bookTitles.add("Building Websites With Joomla");
 		bookTitles.add("The Complete C++ Reference");
 		bookTitles.add("Hardening Linux");
 		bookTitles.add("Zend Framework In Action");
+		bookTitles.add("Black Hand Gang");
+		bookTitles.add("Cool Hand Look");
+		bookTitles.add("Fight Less Love More");
+		bookTitles.add("The God Father");
+		bookTitles.add("Lord John");
 
 		bookAuthors = new ArrayList<>();
 		bookAuthors.add("Hagen Graf");
 		bookAuthors.add("Herbert Schildt");
 		bookAuthors.add("James Tumbull");
 		bookAuthors.add("Rob Allen");
+		bookAuthors.add("Pat Kellemer");
+		bookAuthors.add("Donn Pearce");
+		bookAuthors.add("Laurie Pann");
+		bookAuthors.add("Mario Puzo");
+		bookAuthors.add("Diana Gabaldon");
 
 		bookYearOfProduction = new ArrayList<>();
 		bookYearOfProduction.add("(2006)");
 		bookYearOfProduction.add("(2009)");
 		bookYearOfProduction.add("(2005)");
 		bookYearOfProduction.add("(2007)");
+		bookYearOfProduction.add("(2007)");
+		bookYearOfProduction.add("(2007)");
+		bookYearOfProduction.add("(2007)");
+		bookYearOfProduction.add("(2008)");
+		bookYearOfProduction.add("(2008)");
 	}
 }
 

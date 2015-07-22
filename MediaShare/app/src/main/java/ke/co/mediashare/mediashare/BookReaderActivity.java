@@ -1,6 +1,8 @@
 package ke.co.mediashare.mediashare;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,7 +13,9 @@ import android.widget.Toast;
 
 import com.joanzapata.pdfview.PDFView;
 import com.joanzapata.pdfview.listener.OnLoadCompleteListener;
+import com.joanzapata.pdfview.listener.OnPageChangeListener;
 
+import java.io.File;
 import java.io.IOException;
 
 public class BookReaderActivity extends AppCompatActivity {
@@ -78,17 +82,18 @@ public class BookReaderActivity extends AppCompatActivity {
 	}
 
 	public void loadPdf(){
-		String assetPath = "books/open_km.pdf";
+		String assetPath = "file:///android_asset/books/open_km.pdf";
 		try{
 			FileUtils.fileFromAsset(this, assetPath);
+			pdfView.loadPages();
 			pdfView.fromAsset(assetPath)
-					.defaultPage(1)
+					.defaultPage(2)
 					.showMinimap(false)
 					.enableSwipe(true)
-					.onLoad(new OnLoadCompleteListener() {
+					.onPageChange(new OnPageChangeListener() {
 						@Override
-						public void loadComplete(int i) {
-							Toast.makeText(BookReaderActivity.this, "Document has finished loading", Toast.LENGTH_LONG).show();
+						public void onPageChanged(int i, int i1) {
+
 						}
 					})
 					.load();
@@ -96,4 +101,5 @@ public class BookReaderActivity extends AppCompatActivity {
 			e.printStackTrace();
 		}
 	}
+
 }
