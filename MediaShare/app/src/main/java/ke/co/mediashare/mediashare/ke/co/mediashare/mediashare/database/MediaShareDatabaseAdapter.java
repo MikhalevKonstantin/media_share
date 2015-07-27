@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 /**
  * Created by guidovanrossum on 08/07/15.
@@ -24,6 +25,10 @@ public class MediaShareDatabaseAdapter extends SQLiteOpenHelper {
 				+ Users.USER_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
 				Users.USER_FIRST_NAME + " TEXT," + Users.USER_LAST_NAME + " TEXT," +
 				Users.USER_EMAIL + " TEXT," + Users.USER_PASSWORD + " TEXT" + ");");
+
+		// Create Libraries Table
+		db.execSQL("CREATE TABLE " + Libraries.TABLE_NAME + "(" + Libraries.LIBRARY_ID +
+				" INTEGER PRIMARY KEY AUTOINCREMENT," + Libraries.LIBRARY_NAME + " TEXT);");
 	}
 
 	// Wrapper method for adding a new user
@@ -38,6 +43,20 @@ public class MediaShareDatabaseAdapter extends SQLiteOpenHelper {
 		SQLiteDatabase database = getWritableDatabase();
 
 		return database.insert(Users.TABLE_NAME, Users.USER_FIRST_NAME, users);
+	}
+
+	// Wrapper method for adding a new Library
+	public long addLibrary(String library_name) {
+		ContentValues libraries = new ContentValues();
+		libraries.put(Libraries.LIBRARY_NAME, library_name);
+		SQLiteDatabase database = getWritableDatabase();
+		return database.insert(Libraries.TABLE_NAME, Libraries.LIBRARY_NAME, libraries);
+	}
+
+	// Wrapper method for listing Libraries
+	public Cursor listLibraries() {
+		SQLiteDatabase database = getReadableDatabase();
+		return database.query(Libraries.TABLE_NAME, new String[]{Libraries.LIBRARY_NAME}, null, null, null, null, null);
 	}
 
 	// Wrapper method for returning a password
@@ -60,5 +79,18 @@ public class MediaShareDatabaseAdapter extends SQLiteOpenHelper {
 		// TODO Auto-generated method stub
 
 	}
+
+	public void onUpgrade() {
+		// TODO Auto-generated method stub
+		SQLiteDatabase db = getWritableDatabase();
+		Log.w("LOG_TAG", "Upgrading database");
+		// KILL PREVIOUS
+		db.execSQL("DROP TABLE IF EXISTS " + Libraries.TABLE_NAME);
+		db.execSQL("DROP TABLE IF EXISTS " + Users.TABLE_NAME);
+		onCreate(db);
+
+	}
+
+
 
 }
