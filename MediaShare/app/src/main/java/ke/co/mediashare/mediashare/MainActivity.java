@@ -10,11 +10,14 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import ke.co.mediashare.mediashare.ke.co.mediashare.mediashare.database.MediaShareDatabaseAdapter;
+
 
 public class MainActivity extends Activity {
     private Button start_button;
     private AssetManager assetManager;
     private TextView tag_line, app_name;
+    private MediaShareDatabaseAdapter adapter;
 
 
     @Override
@@ -23,6 +26,7 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
         // Instantiate AssetsManager
         assetManager = getAssets();
+        adapter = new MediaShareDatabaseAdapter(this);
 
         app_name = (TextView)findViewById(R.id.app_name_text);
         tag_line = (TextView)findViewById(R.id.tag_line_text);
