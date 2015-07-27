@@ -19,12 +19,11 @@ public class MediaShareDatabaseAdapter extends SQLiteOpenHelper {
 
 	@Override
 	public void onCreate(SQLiteDatabase db) {
-
 		// Create Users Table
 		db.execSQL("CREATE TABLE " + Users.TABLE_NAME + "("
-				+ Users.USER_ID + "INTEGER PRIMARY KEY AUTOINCREMENT," +
+				+ Users.USER_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
 				Users.USER_FIRST_NAME + " TEXT," + Users.USER_LAST_NAME + " TEXT," +
-				Users.USER_EMAIL + " TEXT," + Users.USER_PASSWORD + " TEXT;" + ")");
+				Users.USER_EMAIL + " TEXT," + Users.USER_PASSWORD + " TEXT" + ");");
 	}
 
 	// Wrapper method for adding a new user
@@ -43,7 +42,7 @@ public class MediaShareDatabaseAdapter extends SQLiteOpenHelper {
 
 	// Wrapper method for returning a password
 	public String newSignIn(String email) {
-		SQLiteDatabase database = getWritableDatabase();
+		SQLiteDatabase database = getReadableDatabase();
 		Cursor cursor = database.query(Users.TABLE_NAME, null,
 				Users.USER_EMAIL + "=?", new String[]{email}, null,
 				null, null);
