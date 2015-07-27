@@ -121,7 +121,7 @@ public class MyLibraryActivity extends ActionBarActivity {
 				MediaShareDatabaseAdapter databaseAdapter = new MediaShareDatabaseAdapter(MyLibraryActivity.this);
 				databaseAdapter.addLibrary(newLibText.getText().toString());
 
-				Toast.makeText(MyLibraryActivity.this, newLibText.getText().toString() + " has been added to your list of libraries", Toast.LENGTH_SHORT).show();
+				Toast.makeText(MyLibraryActivity.this, newLibText.getText().toString() + " has been added to your list of libraries", Toast.LENGTH_LONG).show();
 
 				setUpLibraryView();
 
