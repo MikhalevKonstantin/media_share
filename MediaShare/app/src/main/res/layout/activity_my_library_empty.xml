@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#ffffff"
+                android:orientation="vertical">
+
+    <include
+        android:id="@+id/toolbar_my_library_empty"
+        layout="@layout/tool_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_below="@+id/toolbar_my_library_empty"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="150dp"
+        android:text="@string/no_libraries_found"
+        android:textColor="#FFCC00"
+        android:textStyle="bold"/>
+
+    <Button
+        android:id="@+id/btnAddLibrary"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:background="@drawable/button_background"
+        android:text="@string/add_library"
+        android:textStyle="bold"/>
+</RelativeLayout>
