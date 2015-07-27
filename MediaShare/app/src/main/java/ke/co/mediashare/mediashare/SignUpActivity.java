@@ -37,7 +37,8 @@ public class SignUpActivity extends Fragment implements View.OnClickListener {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceBundle) {
 		View view = inflater.inflate(R.layout.activity_signup, container, false);
-		mediaShareDatabaseAdapter = new MediaShareDatabaseAdapter(view.getContext());
+
+		mediaShareDatabaseAdapter = new MediaShareDatabaseAdapter(getActivity());
 
 		DIALOG_CONTEXT = getActivity();
 		first_name = (EditText) view.findViewById(R.id.edit_text_first_name);
@@ -92,13 +93,7 @@ public class SignUpActivity extends Fragment implements View.OnClickListener {
 
 					@Override
 					protected Void doInBackground(Void... params) {
-						try {
-							mediaShareDatabaseAdapter.addUser(first_name.getText().toString(), last_name.getText().toString(), email_address.getText().toString(), password.getText().toString());
-							Log.d("MediaShare", "Record has been saved");
-						} catch (Exception ex) {
-							ex.printStackTrace();
-						}
-
+						createAccount();
 						return null;
 					}
 
@@ -136,6 +131,16 @@ public class SignUpActivity extends Fragment implements View.OnClickListener {
 			ex.printStackTrace();
 		}
 
+
+	}
+
+	public void createAccount() {
+		try {
+			mediaShareDatabaseAdapter.addUser(first_name.getText().toString(), last_name.getText().toString(), email_address.getText().toString(), password.getText().toString());
+			Log.d("MediaShare", "Record has been saved");
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
 
 	}
 }
