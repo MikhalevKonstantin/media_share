@@ -8,15 +8,18 @@
 
     <include
         android:id="@+id/toolbar_my_library"
-        android:layout_height="wrap_content"
+        layout="@layout/tool_bar"
         android:layout_width="match_parent"
-        layout="@layout/tool_bar"/>
+        android:layout_height="wrap_content"/>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/my_library_recyclerView"
+    <ExpandableListView
+        android:id="@+id/my_library_expView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="#FF9966"
+        android:divider="#ffffff"
+        android:dividerHeight="1dp"
         android:scrollbars="vertical">
-    </android.support.v7.widget.RecyclerView>
+    </ExpandableListView>
 
 </LinearLayout>
