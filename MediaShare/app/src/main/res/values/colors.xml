@@ -2,6 +2,7 @@
 <resources>
     <color name="colorPrimary">#ff6600</color>
     <color name="colorPrimaryDark">#90ff6600</color>
+    <color name="colorAccent">#ff6600</color>
     <color name="ToolbarColor">#ff6600</color>
     <color name="ControlNormalColor">#ffffff</color>
     <color name="ControlActivatedColor">#ff6600</color>
