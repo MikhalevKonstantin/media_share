@@ -1,143 +1,161 @@
 package ke.co.mediashare.mediashare;
 
 import android.content.DialogInterface;
-import android.content.Intent;
+import android.database.Cursor;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.GestureDetector;
-import android.view.MotionEvent;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ExpandableListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+
+import ke.co.mediashare.mediashare.adapters.LibrariesExpandableListAdapter;
+import ke.co.mediashare.mediashare.ke.co.mediashare.mediashare.database.Libraries;
+import ke.co.mediashare.mediashare.ke.co.mediashare.mediashare.database.MediaShareDatabaseAdapter;
+import ke.co.mediashare.mediashare.utils.IterableCursor;
 
 public class MyLibraryActivity extends ActionBarActivity {
-	ArrayList<Integer> bookThumbnails;
-	ArrayList<String> bookTitles;
-	ArrayList<String> bookAuthors;
-	ArrayList<String> bookYearOfProduction;
-	RecyclerView recyclerView;
-	RecyclerView.Adapter reAdapter;
-	RecyclerView.LayoutManager reLayoutManager;
-	CharSequence[] bookOptions;
+	List<String> libraryGroupList;
+	List<String> libraryChildList;
+	Map<String, List<String>> libraryCollection;
+	MediaShareDatabaseAdapter databaseAdapter;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+
+		databaseAdapter = new MediaShareDatabaseAdapter(this);
+
+		if (databaseAdapter.listLibraries().getCount() == 0) {
+			setContentView(R.layout.activity_my_library_empty);
+
+			Toolbar toolbar;
+			toolbar = (Toolbar) findViewById(R.id.toolbar_my_library_empty);
+			toolbar.setNavigationIcon(R.drawable.ic_action_arrow_left);
+			setSupportActionBar(toolbar);
+
+			Button addLibraryButton = (Button) findViewById(R.id.btnAddLibrary);
+			addLibraryButton.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					addLibrary();
+				}
+			});
+
+		} else {
+			setUpLibraryView();
+		}
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		getMenuInflater().inflate(R.menu.menu_my_library, menu);
+
+		return true;
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// Handle action bar item clicks here. The action bar will
+		// automatically handle clicks on the Home/Up button, so long
+		// as you specify a parent activity in AndroidManifest.xml.
+		int id = item.getItemId();
+
+		//noinspection SimplifiableIfStatement
+		if (id == R.id.action_add_library) {
+
+			addLibrary();
+
+			return true;
+		}
+
+		return super.onOptionsItemSelected(item);
+	}
+
+	// Method for setting up Library view
+	public void setUpLibraryView() {
 		setContentView(R.layout.activity_my_library);
 
-		bookOptions = new CharSequence[]{"Open","Buy","Rent","Remove from library"};
-
 		Toolbar toolbar;
-
 		toolbar = (Toolbar) findViewById(R.id.toolbar_my_library);
 		toolbar.setNavigationIcon(R.drawable.ic_action_arrow_left);
+		toolbar.inflateMenu(R.menu.menu_my_library);
 		setSupportActionBar(toolbar);
 
-		setUpBooks();
-		recyclerView = (RecyclerView) findViewById(R.id.my_library_recyclerView);
-		recyclerView.setHasFixedSize(true);
-		reAdapter = new MediaShareLibraryAdapter(bookThumbnails, bookTitles, bookAuthors, bookYearOfProduction);
-		recyclerView.setAdapter(reAdapter);
-		reLayoutManager = new LinearLayoutManager(this);
-		recyclerView.setLayoutManager(reLayoutManager);
+		createLibraryGroupList(); // Load Library names
+		createLibraryCollection(); // Create collections
 
-		// Adding Item Click Listener
-		final GestureDetector gestureDetector = new GestureDetector(this, new GestureDetector.SimpleOnGestureListener() {
+		ExpandableListView expandableListView = (ExpandableListView) findViewById(R.id.my_library_expView);
+		LibrariesExpandableListAdapter expandableListAdapter = new LibrariesExpandableListAdapter(this, libraryGroupList, libraryCollection);
+		expandableListView.setAdapter(expandableListAdapter);
+	}
+
+
+	// Method for starting a "New Library" dialog
+	public void addLibrary() {
+		final EditText newLibText = new EditText(this);
+		newLibText.setHint("Enter library name");
+
+		AlertDialog.Builder addLibraryDialog = new AlertDialog.Builder(this);
+		addLibraryDialog.setTitle("Add Library");
+		addLibraryDialog.setView(newLibText);
+		addLibraryDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
 			@Override
-			public boolean onSingleTapUp(MotionEvent motionEvent) {
-
-				return true;
-			}
-
-		});
-
-		recyclerView.addOnItemTouchListener(new RecyclerView.OnItemTouchListener() {
-			@Override
-			public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent e) {
-				View child = rv.findChildViewUnder(e.getX(), e.getY());
-
-				if (child != null && gestureDetector.onTouchEvent(e)) {
-					AlertDialog.Builder alertBuilder = new AlertDialog.Builder(MyLibraryActivity.this);
-					alertBuilder.setItems(bookOptions, new DialogInterface.OnClickListener() {
-						@Override
-						public void onClick(DialogInterface dialog, int which) {
-
-							// If the option selected is Open, then open the selected PDF file
-							if (bookOptions[which] == "Open") {
-
-								Intent intent = new Intent(MyLibraryActivity.this, BookReaderActivity.class);
-								startActivity(intent);
-							}
-
-						}
-					});
-
-					AlertDialog alertDialog = alertBuilder.create();
-					alertDialog.show();
-				}
-				return false;
-			}
-
-			@Override
-			public void onTouchEvent(RecyclerView rv, MotionEvent e) {
-
-			}
-
-			@Override
-			public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
+			public void onClick(DialogInterface dialog, int which) {
 
 			}
 		});
+		addLibraryDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				MediaShareDatabaseAdapter databaseAdapter = new MediaShareDatabaseAdapter(MyLibraryActivity.this);
+				databaseAdapter.addLibrary(newLibText.getText().toString());
+
+				Toast.makeText(MyLibraryActivity.this, newLibText.getText().toString() + " has been added to your list of libraries", Toast.LENGTH_SHORT).show();
+
+				setUpLibraryView();
+
+			}
+		});
+		AlertDialog libAlert = addLibraryDialog.create();
+		libAlert.show();
 	}
 
-	public void setUpBooks() {
-		bookThumbnails = new ArrayList<>();
-		bookThumbnails.add(R.drawable.book_building_websites_with_joomla);
-		bookThumbnails.add(R.drawable.book_complete_reference);
-		bookThumbnails.add(R.drawable.book_hardening_linux);
-		bookThumbnails.add(R.drawable.book_zend_framework_in_action);
-		bookThumbnails.add(R.drawable.novel_black_hand_gang);
-		bookThumbnails.add(R.drawable.novel_cool_hand_look);
-		bookThumbnails.add(R.drawable.novel_fight_less_love_more);
-		bookThumbnails.add(R.drawable.novel_the_god_father);
-		bookThumbnails.add(R.drawable.novel_lord_john);
-
-		bookTitles = new ArrayList<>();
-		bookTitles.add("Building Websites With Joomla");
-		bookTitles.add("The Complete C++ Reference");
-		bookTitles.add("Hardening Linux");
-		bookTitles.add("Zend Framework In Action");
-		bookTitles.add("Black Hand Gang");
-		bookTitles.add("Cool Hand Look");
-		bookTitles.add("Fight Less Love More");
-		bookTitles.add("The God Father");
-		bookTitles.add("Lord John");
-
-		bookAuthors = new ArrayList<>();
-		bookAuthors.add("Hagen Graf");
-		bookAuthors.add("Herbert Schildt");
-		bookAuthors.add("James Tumbull");
-		bookAuthors.add("Rob Allen");
-		bookAuthors.add("Pat Kellemer");
-		bookAuthors.add("Donn Pearce");
-		bookAuthors.add("Laurie Pann");
-		bookAuthors.add("Mario Puzo");
-		bookAuthors.add("Diana Gabaldon");
-
-		bookYearOfProduction = new ArrayList<>();
-		bookYearOfProduction.add("(2006)");
-		bookYearOfProduction.add("(2009)");
-		bookYearOfProduction.add("(2005)");
-		bookYearOfProduction.add("(2007)");
-		bookYearOfProduction.add("(2007)");
-		bookYearOfProduction.add("(2007)");
-		bookYearOfProduction.add("(2007)");
-		bookYearOfProduction.add("(2008)");
-		bookYearOfProduction.add("(2008)");
+	// Method for creating a list of Library names from the database
+	public void createLibraryGroupList() {
+		libraryGroupList = new ArrayList<String>();
+		Cursor libraries = databaseAdapter.listLibraries();
+		for (Cursor cursor : new IterableCursor(libraries)) {
+			String library = cursor.getString(cursor.getColumnIndex(Libraries.LIBRARY_NAME));
+			libraryGroupList.add(library);
+		}
 	}
 
+	// Method for Library items
+	public void loadChildItems(String[] libraryNames) {
+		libraryChildList = new ArrayList<String>();
+		for (String libraryItem : libraryNames) {
+			libraryChildList.add(libraryItem);
+		}
+	}
+
+	// Method for aggregating Library collections
+	public void createLibraryCollection() {
+		String[] books = {"Linux Fundamentals", "VB.NET Book", "Mary"};
+		libraryCollection = new LinkedHashMap<String, List<String>>();
+		for (String bookItem : libraryGroupList) {
+			loadChildItems(books);
+			libraryCollection.put(bookItem, libraryChildList);
+		}
+	}
 }
