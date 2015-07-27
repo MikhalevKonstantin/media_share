@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="colorPrimary">#ff6600</color>
+    <color name="colorPrimaryDark">#90ff6600</color>
     <color name="ToolbarColor">#ff6600</color>
     <color name="ControlNormalColor">#ffffff</color>
     <color name="ControlActivatedColor">#ff6600</color>
