@@ -3,16 +3,18 @@ package ke.co.mediashare.mediashare;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import ke.co.mediashare.mediashare.ke.co.mediashare.mediashare.database.MediaShareDatabaseAdapter;
 
 
 public class SignInActivity extends Fragment implements View.OnClickListener {
@@ -50,47 +52,33 @@ public class SignInActivity extends Fragment implements View.OnClickListener {
 	public void userSignIn() {
 		try {
 			if (TextUtils.isEmpty(email_text.getText().toString())) {
-				email_text.setError("You must provide your email address");
-				Toast.makeText(DIALOG_CONTEXT, "Please provide your email address", Toast.LENGTH_LONG).show();
+				email_text.setError("You must provide your email");
+				Toast.makeText(DIALOG_CONTEXT, "You must provide your email", Toast.LENGTH_SHORT).show();
 
 			} else if (TextUtils.isEmpty(password_text.getText().toString())) {
 				password_text.setError("You must provide your password");
-				Toast.makeText(DIALOG_CONTEXT, "You must provide your password", Toast.LENGTH_LONG).show();
+				Toast.makeText(DIALOG_CONTEXT, "You must provide your password", Toast.LENGTH_SHORT).show();
+			} else {
+				try {
+					String email = email_text.getText().toString();
+					String password = password_text.getText().toString();
 
-			} else if (!email_text.getText().toString().equals("user@mediashare.com") && !password_text.getText().toString().equals("mediashare")) {
-				Toast.makeText(getActivity(), "Incorrect password or email", Toast.LENGTH_LONG).show();
-				email_text.setError("Incorrect email or password");
-				password_text.setError("Incorrect password or email");
-
-			} else if (email_text.getText().toString().equals("user@mediashare.com") && password_text.getText().toString().equals("mediashare")) {
-				AsyncTask<Void, Void, Void> signInTask = new AsyncTask<Void, Void, Void>() {
-					@Override
-					protected void onPreExecute() {
-						progressDialog = new ProgressDialog(DIALOG_CONTEXT);
-						progressDialog.setTitle("SignIn");
-						progressDialog.setMessage("Signing In.....");
-						progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-						progressDialog.setCancelable(false);
-						progressDialog.setIndeterminate(true);
-						progressDialog.show();
-					}
-
-					@Override
-					protected Void doInBackground(Void... params) {
-						Intent signInIntent = new Intent(getActivity(), DiscoverBooksActivity.class);
-						startActivity(signInIntent);
-						return null;
-					}
-
-					@Override
-					protected void onPostExecute(Void result) {
-						progressDialog.dismiss();
+					MediaShareDatabaseAdapter mediaShareDatabaseAdapter = new MediaShareDatabaseAdapter(getActivity().getApplicationContext());
+					String returned_password = mediaShareDatabaseAdapter.newSignIn(email);
+					if (password.equals(returned_password)) {
+						Intent intent = new Intent(getActivity(), DiscoverBooksActivity.class);
+						startActivity(intent);
 						resetSignIn();
+						Toast.makeText(getActivity(), "Welcome", Toast.LENGTH_SHORT).show();
+					} else {
+						Toast.makeText(getActivity(), "User does not exist. Try again", Toast.LENGTH_SHORT).show();
 					}
-				};
-				signInTask.execute((Void[]) null);
-			}
+				} catch (Exception e) {
+					Log.d("Database Error", e.getMessage());
+				}
 
+
+			}
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
@@ -102,5 +90,6 @@ public class SignInActivity extends Fragment implements View.OnClickListener {
 		email_text.setText("");
 		password_text.setText("");
 	}
+
 
 }
