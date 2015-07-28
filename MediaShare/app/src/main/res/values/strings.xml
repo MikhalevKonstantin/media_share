@@ -58,5 +58,6 @@
     <string name="no_libraries_found">NO LIBRARIES FOUND</string>
     <string name="add_library">ADD LIBRARY</string>
     <string name="action_add_library">Add Library</string>
+    <string name="action_delete_library">Delete Library</string>
 
 </resources>
