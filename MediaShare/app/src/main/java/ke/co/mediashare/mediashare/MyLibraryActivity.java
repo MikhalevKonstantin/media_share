@@ -6,9 +6,12 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
+import android.support.v7.view.ActionMode;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ExpandableListView;
@@ -29,6 +32,7 @@ public class MyLibraryActivity extends ActionBarActivity {
 	List<String> libraryChildList;
 	Map<String, List<String>> libraryCollection;
 	MediaShareDatabaseAdapter databaseAdapter;
+	ActionMode actionMode;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +64,6 @@ public class MyLibraryActivity extends ActionBarActivity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.menu_my_library, menu);
-
 		return true;
 	}
 
@@ -98,6 +101,31 @@ public class MyLibraryActivity extends ActionBarActivity {
 		ExpandableListView expandableListView = (ExpandableListView) findViewById(R.id.my_library_expView);
 		LibrariesExpandableListAdapter expandableListAdapter = new LibrariesExpandableListAdapter(this, libraryGroupList, libraryCollection);
 		expandableListView.setAdapter(expandableListAdapter);
+
+		// Set listener for a long click on the groups
+		expandableListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+			@Override
+			public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+				int itemType = ExpandableListView.getPackedPositionType(id);
+
+				if (itemType == ExpandableListView.PACKED_POSITION_TYPE_CHILD) {
+
+					return false;
+				} else if (itemType == ExpandableListView.PACKED_POSITION_TYPE_GROUP) {
+					if (actionMode != null) {
+						return false;
+					}
+
+					actionMode = startSupportActionMode(myLibraryActionModeCallback);
+					view.setSelected(true);
+				} else {
+
+					return false;
+				}
+
+				return true;
+			}
+		});
 	}
 
 
@@ -158,4 +186,29 @@ public class MyLibraryActivity extends ActionBarActivity {
 			libraryCollection.put(bookItem, libraryChildList);
 		}
 	}
+
+	// Setting Contextual Actions for the Expandable ListView group items
+	private android.support.v7.view.ActionMode.Callback myLibraryActionModeCallback = new ActionMode.Callback() {
+		@Override
+		public boolean onCreateActionMode(ActionMode mode, Menu menu) {
+			MenuInflater inflater = mode.getMenuInflater();
+			inflater.inflate(R.menu.my_library_context_menu, menu);
+			return true;
+		}
+
+		@Override
+		public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
+			return false;
+		}
+
+		@Override
+		public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
+			return false;
+		}
+
+		@Override
+		public void onDestroyActionMode(ActionMode mode) {
+			actionMode = null;
+		}
+	};
 }
